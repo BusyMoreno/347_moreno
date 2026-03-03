@@ -1,0 +1,69 @@
+#cloud-config
+# source: https://gist.github.com/syntaqx/9dd3ff11fb3d48b032c84f3e31af9163
+
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin, docker
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUBo+qnNu5xxM9vfz4C04M36FHxHNrEMdm5TkFj1/SfVtqunlUOeMpu7nFCZZKnX8HYwf/MkjcBiTYAgncxku8grwl6XuW/pcvmb6/ghSIaw4xtRRSzit7omqJ5d8kXB3+Nd1aaMHsjfly4nkaqswhySVXQqr8Hw6DbWVw8jLLVKEE+5NZHY33hJkhJwK4blCllsGpmQaKi1qxjsN0hZOWNK01iJAydwD8t2xJ0NOYbq8Qas5IyPnRN7SPxvEhIP6WLQ6Ym6Dmf8FwNW1cHLTKabgjzt5f/HKUkKS89dPd3fn4nnFli1BOMECGUIvVlOw2pQNri7+04OOfn2FGlqr5 teacher
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC0OJztkQpwqNAvN1Zl1mf7n/BwLnQPYmFj80hgvbs9H3y9ZwWaf/PJJ29jW8MSEIh9SawwSvlIbogY54L6jaXSfSQhBzpOmHXdSHda4PbdUM2Vdthc+egbF3ZaucEei6IytlVmPZi6hDuFmfWbm3fSIAEoFpffDw3oWrc7HSsgy7jKoYY0A3wOgPrwRETA/FwHM8LDLSZgPHgUQTgONcJcrkALmrmkyWY0VRAen5Jw30LQ43XdEo1MLEpELu/k1jlNgZFem0+j+PenoIwsFQCv1p3/nDPUAIUZUnX+x/GvN7ygDp5OoSJAbOZ71N+wRfjFd+RJdOm02x/VKK/3o7dubV8/DnohCyto9nc1zpj6/f/3qWzHMyL1orkZmlMucaXO8E2fDKJHEFGIYbjOHusp46V34kSoV9X6sSumYkyWy5Liwe17nk9xQQVCAwgGlgOQ6NrKN5we7bvk+9SoKUzk+2eYnfAltGLFs7RMnrkz1S42X+biHNTFMwqoka/XzZLZ8wbtuaKPyDwpFKjI2hqS3DKZMirHptEC2QzM90D59p1a741CdZTw0QCaAifgGiLRbWXVqpvNWgzP35VFPxuwhuyEKjbG/YEZa3MtHWhCCqZ00emDLAJVmL/Digitqiqb4pX6I8AGmOvF2FytraKbUxy/MuyXohyfQ32YTcokqw== moreno (schoolwork)@Pflaumi
+ssh_pwauth: false
+disable_root: false
+
+package_update: true
+package_upgrade: true
+
+groups:
+  - docker
+
+system_info:
+  default_user:
+    groups: [docker]
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - unattended-upgrades
+
+final_message: "Cloud-Init: Docker Compose Installation erfolgreich abgeschlossen."
+
+write_files:
+  - path: /home/ubuntu/docker-compose.yml
+    content: |
+      version: '3.8'
+
+      services:
+        db:
+          image: mariadb:latest
+          container_name: m347-cloud-db
+          restart: always
+          environment:
+            MYSQL_ROOT_PASSWORD: rootpass
+            MYSQL_DATABASE: mydb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: userpass
+
+        web:
+          image: honorednerd/347_kn04-web:latest
+          container_name: m347-cloud-web
+          ports:
+            - "80:80"
+          depends_on:
+            - db
+
+runcmd:
+  - mkdir -p /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  - systemctl enable docker
+  - systemctl start docker
+  - cd /home/ubuntu
+  - docker compose up -d
