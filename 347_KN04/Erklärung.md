@@ -79,8 +79,8 @@ docker compose up führt folgende Schritte aus:
 - Logs anzeigen (wenn ohne -d)
 - Optional: Container im Hintergrund starten (-d)
 
-![db.php](TeilA\db.php-a.png)
-![db.php](TeilA\info.php-a.png)
+![db.php](TeilA/db.php-a.png)
+![db.php](TeilA/info.php-a.png)
 
 ## Teil b) Verwendung eigener Images
 
@@ -136,8 +136,8 @@ Erklärung Fehler db.php
 
 - Lösung: Docker Compose Netzwerk korrekt verbinden oder Hostname db in PHP-Skript verwenden
 
-![db.php](TeilB\info.php-b.png)
-![db.php](TeilB\db.php-b.png)
+![db.php](TeilB/info.php-b.png)
+![db.php](TeilB/db.php-b.png)
 
 ## B) Docker Compose: Cloud (40%)
 
@@ -213,5 +213,6 @@ runcmd:
   - docker compose up -d
   ```
 
-  ![db.php](Teil2\db.php.png)
-  ![db.php](Teil2\info.php.png)
+  ![db.php](Teil2/db.php.png)
+
+  ![db.php](Teil2/info.php.png)
