@@ -1,0 +1,1 @@
+echo "Hallo aus dem Skript v1"
