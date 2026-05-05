@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: account
+  template:
+    metadata:
+      labels:
+        app: account
+    spec:
+      containers:
+      - name: account
+        # Ersetze 'honorednerd' durch deinen DockerHub-Namen, falls er anders ist
+        image: honorednerd/account:latest
+        ports:
+        - containerPort: 8080
+        env:
+        # Falls dein C#-Code die Datenbank-Verbindung über eine Env-Variable steuert:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+spec:
+  selector:
+    app: account
+  ports:
+    - protocol: TCP
+      port: 8080        # Der Port, unter dem andere Pods den Service ansprechen
+      targetPort: 8080  # Der Port, auf dem die App im Container hört
+  type: ClusterIP      # Interne Kommunikation (reicht völlig aus)
