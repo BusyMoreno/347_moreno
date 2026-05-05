@@ -1,3 +1,13 @@
+# KN02 -- Rückblick
+
+**In welchem Netzwerk befanden sich die beiden Container?**  
+Die beiden Container aus KN02 befanden sich im **Default Bridge Netzwerk** (Standard-Netzwerk namens `bridge`). Wenn beim Starten eines Containers kein explizites Netzwerk angegeben wird, weist Docker ihn automatisch diesem Standard-Netzwerk zu.
+
+**Wieso konnten die miteinander reden?**  
+Sie konnten miteinander kommunizieren, da sie sich **im selben Netzwerk** befanden. Docker erlaubt standardmäßig die Kommunikation zwischen allen Containern, die mit demselben Bridge-Netzwerk verbunden sind. Sie konnten sich somit gegenseitig über ihre zugewiesenen IP-Adressen erreichen (Namensauflösung/DNS funktioniert im Default Bridge Netzwerk jedoch nicht standardmäßig).
+
+------------------------------------------------------------------------
+
 # KN03 -- Docker Netzwerke
 
 ## Übersicht der Container
