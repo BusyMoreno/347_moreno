@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: buysell
-        image: honorednerd/buysell-service:v2
+        image: honorednerd/buysell:v2
         ports:
         - containerPort: 8002
         env:
