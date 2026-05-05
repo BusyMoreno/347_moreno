@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: honorednerd/frontend:v2
+        image: honorednerd/frontend:v5
         ports:
         - containerPort: 80
 ---
