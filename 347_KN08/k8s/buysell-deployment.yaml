@@ -32,4 +32,6 @@ spec:
     - protocol: TCP
       port: 8002
       targetPort: 8002
-  type: ClusterIP
+      nodePort: 30003  # Hinzugefügt für externen Zugriff
+  type: NodePort      # Geändert von ClusterIP auf NodePort
+---
