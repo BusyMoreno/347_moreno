@@ -1,5 +1,5 @@
-const holdingsUrl = "http://3.85.171.49:30002/Account/Cryptos?userId=<userId>";
-const friendsUrl = "http://3.85.171.49:30002/Account/Friends?userId=<userId>";
+const holdingsUrl = "http://44.203.84.0:30002/Account/Cryptos?userId=<userId>";
+const friendsUrl = "http://44.203.84.0:30002/Account/Friends?userId=<userId>";
 
 function holdingsApiRequest(uid) {
     var theUrl = holdingsUrl.replace("<userId>", uid);
