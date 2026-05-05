@@ -1,6 +1,6 @@
 // Direkt-Links statt process.env
-const buyUrl = "http://localhost:8002/buy";
-const sellUrl = "http://localhost:8002/sell";
+const buyUrl = "http://44.203.84.0:8002/buy";
+const sellUrl = "http://44.203.84.0:8002/sell";
 
 function buyApiRequest(uid, amount) {
     const data = {

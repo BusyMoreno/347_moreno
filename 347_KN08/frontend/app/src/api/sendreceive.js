@@ -1,5 +1,5 @@
 // Direkt-Link statt process.env
-const sendUrl = "http://localhost:8003/send";
+const sendUrl = "http://44.203.84.0:8003/send";
 
 function sendApiRequest(receiverId, senderId, amount) {
     const data = { id: senderId, receiverId: receiverId, amount: amount };
