@@ -15,7 +15,7 @@ spec:
       containers:
       - name: account
         # Ersetze 'honorednerd' durch deinen DockerHub-Namen, falls er anders ist
-        image: honorednerd/account:latest
+        image: honorednerd/account:v2
         ports:
         - containerPort: 8080
         env:
