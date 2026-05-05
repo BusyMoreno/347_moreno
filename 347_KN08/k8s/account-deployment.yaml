@@ -32,6 +32,7 @@ spec:
     app: account
   ports:
     - protocol: TCP
-      port: 8080        # Der Port, unter dem andere Pods den Service ansprechen
-      targetPort: 8080  # Der Port, auf dem die App im Container hört
-  type: ClusterIP      # Interne Kommunikation (reicht völlig aus)
+      port: 8080        # Interner Port
+      targetPort: 8080  # Port im Container
+      nodePort: 30002   # <--- NEU: Über diesen Port erreichen wir ihn von außen
+  type: NodePort        # <--- GEÄNDERT von ClusterIP auf NodePort    # Interne Kommunikation (reicht völlig aus)

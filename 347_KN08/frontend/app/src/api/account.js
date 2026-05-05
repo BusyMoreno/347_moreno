@@ -1,7 +1,5 @@
-// Wir ersetzen die fehlerhaften .env Variablen hart durch die echten URLs.
-// Wichtig: Das <userId> muss im Text stehen bleiben, damit die .replace() Funktion unten funktioniert!
-const holdingsUrl = "http://localhost:4000/Account/Cryptos?userId=<userId>";
-const friendsUrl = "http://localhost:4000/Account/Friends?userId=<userId>";
+const holdingsUrl = "http://3.85.171.49:30002/Account/Cryptos?userId=<userId>";
+const friendsUrl = "http://3.85.171.49:30002/Account/Friends?userId=<userId>";
 
 function holdingsApiRequest(uid) {
     var theUrl = holdingsUrl.replace("<userId>", uid);
