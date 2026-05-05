@@ -34,5 +34,5 @@ spec:
   ports:
     - protocol: TCP
       port: 8080      # Dieser Port ist egal für den Browser
-      targetPort: 4000 # HIER MUSS DER PORT STEHEN, AUF DEM DIE APP LÄUFT
+      targetPort: 8080 # HIER MUSS DER PORT STEHEN, AUF DEM DIE APP LÄUFT
       nodePort: 30002      # <--- GEÄNDERT von ClusterIP auf NodePort    # Interne Kommunikation (reicht völlig aus)
